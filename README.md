@@ -1,0 +1,1 @@
+Hi, I’m Aman Azhaan, a Marketing and Digital Analytics professional. This portfolio highlights selected work in campaign and funnel analysis, measurement planning, and dashboard reporting using SQL, Python, Power BI, Looker Studio, Tableau, GA4, and GTM. Project summaries reflect my experience; code samples use illustrative data and schemas.
