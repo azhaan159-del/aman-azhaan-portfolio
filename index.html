@@ -3,33 +3,244 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Aman Azhaan | Marketing Analytics</title>
+  <meta name="theme-color" content="#10161c">
+  <meta name="description" content="Aman Azhaan's marketing analytics portfolio: measurement, SQL, Python, CRO, and BI dashboard examples.">
+  <title>Aman Azhaan | Marketing Analytics & BI</title>
+  <style>
+    :root{color-scheme:dark;--bg:#10161c;--panel:#172129;--panel2:#1c2932;--ink:#f3f6f4;--muted:#a9b8b6;--line:rgba(226,241,235,.12);--mint:#a7f3d0;--lime:#d2f36b;--blue:#9cc7ff;--shadow:0 24px 70px rgba(0,0,0,.28);--radius:24px}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:90px}
+    body{margin:0;background:radial-gradient(ellipse at 72% 8%,rgba(62,107,93,.19),transparent 36%),radial-gradient(ellipse at 0% 55%,rgba(70,107,147,.12),transparent 33%),var(--bg);color:var(--ink);font:16px/1.6 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    a{color:inherit;text-decoration:none}
+    button{font:inherit}
+    .wrap{width:min(1120px,calc(100% - 40px));margin:auto}
+    .topbar{position:sticky;top:0;z-index:10;background:rgba(16,22,28,.82);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+    .nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{font-size:15px;font-weight:800;letter-spacing:.02em;display:flex;align-items:center;gap:11px}
+    .brand-mark{width:35px;height:35px;border-radius:12px;background:linear-gradient(145deg,var(--mint),var(--lime));color:#14221d;display:grid;place-items:center;font-weight:900}
+    .navlinks{display:flex;align-items:center;gap:28px;color:var(--muted);font-size:14px}
+    .navlinks a:hover,.text-link:hover{color:var(--mint)}
+    .nav-cta,.button{display:inline-flex;align-items:center;justify-content:center;gap:9px;border:1px solid var(--line);border-radius:999px;padding:11px 17px;font-size:14px;font-weight:750;transition:transform .2s ease,border-color .2s ease,background .2s ease}
+    .nav-cta:hover,.button:hover{transform:translateY(-2px);border-color:rgba(167,243,208,.5)}
+    .button.primary{background:var(--mint);border-color:var(--mint);color:#12211b}
+    .button.primary:hover{background:#c6ffe5}
+    .button.soft{background:rgba(255,255,255,.035)}
+    .menu-toggle{display:none;background:none;color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:8px 11px}
+    .hero{padding:78px 0 68px;display:grid;grid-template-columns:1.08fr .92fr;gap:56px;align-items:center}
+    .eyebrow{display:inline-flex;align-items:center;gap:9px;color:var(--mint);font-size:12px;font-weight:800;letter-spacing:.13em;text-transform:uppercase}
+    .eyebrow:before{content:"";width:23px;height:1px;background:currentColor}
+    h1{font-size:clamp(42px,6.2vw,76px);line-height:1.02;letter-spacing:-.055em;margin:22px 0 19px;max-width:700px}
+    .accent{color:var(--mint)}
+    .hero-copy{font-size:18px;line-height:1.7;color:var(--muted);max-width:620px}
+    .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+    .fine{font-size:12px;color:var(--muted);margin-top:18px}
+    .hero-visual{position:relative;padding:23px;border:1px solid var(--line);border-radius:30px;background:linear-gradient(150deg,rgba(39,58,65,.92),rgba(22,32,39,.92));box-shadow:var(--shadow);overflow:hidden}
+    .hero-visual:before{content:"";position:absolute;width:250px;height:250px;border-radius:50%;background:rgba(167,243,208,.12);filter:blur(60px);right:-100px;top:-120px}
+    .visual-head,.metric-row,.bar-label{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .visual-head{position:relative;margin-bottom:22px}
+    .tiny-label{color:var(--muted);font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+    .live-chip{padding:5px 10px;border:1px solid rgba(167,243,208,.23);border-radius:999px;color:var(--mint);font-size:11px}
+    .metric-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .metric{position:relative;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.06);border-radius:17px;padding:15px}
+    .metric strong{display:block;font-size:24px;letter-spacing:-.04em;margin-top:3px}
+    .metric small{color:var(--muted);font-size:11px}
+    .funnel{margin-top:18px;padding:17px;border-radius:18px;background:rgba(9,15,19,.34)}
+    .bar-label{font-size:12px;color:var(--muted);margin:10px 0 5px}
+    .bar{height:7px;background:rgba(255,255,255,.1);border-radius:20px;overflow:hidden}
+    .bar i{height:100%;display:block;border-radius:inherit;background:linear-gradient(90deg,var(--mint),var(--lime));animation:grow .9s ease both}
+    @keyframes grow{from{width:0}to{width:var(--w)}}
+    .scroll-hint{margin-top:20px;color:var(--muted);font-size:12px;display:flex;align-items:center;gap:9px}
+    .scroll-hint span{color:var(--mint);font-size:18px}
+    section{padding:65px 0}
+    .section-head{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:26px}
+    .section-head h2{font-size:clamp(29px,4vw,42px);line-height:1.08;letter-spacing:-.04em;margin:10px 0 0}
+    .section-head p{color:var(--muted);max-width:430px;margin:0}
+    .filters{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:19px}
+    .filter{cursor:pointer;background:rgba(255,255,255,.035);border:1px solid var(--line);color:var(--muted);border-radius:999px;padding:8px 14px;font-size:13px}
+    .filter[aria-pressed="true"]{background:var(--mint);color:#13221b;border-color:var(--mint);font-weight:800}
+    .projects{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+    .project{border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(155deg,rgba(31,45,52,.92),rgba(22,31,37,.95));padding:22px;min-height:255px;display:flex;flex-direction:column;transition:transform .2s,border-color .2s}
+    .project:hover{transform:translateY(-4px);border-color:rgba(167,243,208,.35)}
+    .project[hidden]{display:none}
+    .project-top{display:flex;align-items:center;justify-content:space-between}
+    .number{font-size:12px;color:var(--mint);font-weight:800;letter-spacing:.08em}
+    .project-icon{width:39px;height:39px;border-radius:13px;background:rgba(167,243,208,.1);display:grid;place-items:center;color:var(--mint);font-size:19px}
+    .project h3{font-size:19px;line-height:1.25;letter-spacing:-.02em;margin:18px 0 9px}
+    .project p{color:var(--muted);font-size:14px;margin:0 0 17px}
+    .tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:auto}
+    .tag{font-size:11px;color:#c9d8d3;background:rgba(255,255,255,.055);border-radius:999px;padding:5px 9px}
+    details{margin-top:15px;border-top:1px solid var(--line);padding-top:12px}
+    summary{cursor:pointer;color:var(--mint);font-size:13px;font-weight:750;list-style:none}
+    summary::-webkit-details-marker{display:none}
+    summary:after{content:"＋";float:right}
+    details[open] summary:after{content:"−"}
+    .detail{padding-top:11px;color:var(--muted);font-size:13px}
+    .detail ul{padding-left:18px;margin:6px 0}
+    .example-links{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .example{padding:21px;border:1px solid var(--line);border-radius:20px;background:rgba(255,255,255,.035);transition:background .2s,transform .2s}
+    .example:hover{background:rgba(167,243,208,.07);transform:translateY(-3px)}
+    .example-icon{color:var(--mint);font-size:22px}
+    .example h3{font-size:17px;margin:12px 0 6px}
+    .example p{color:var(--muted);font-size:13px;margin:0 0 17px}
+    .text-link{color:var(--mint);font-size:13px;font-weight:750}
+    .about-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:36px;align-items:start}
+    .about-card{padding:25px;border-radius:var(--radius);border:1px solid var(--line);background:linear-gradient(140deg,rgba(167,243,208,.1),rgba(255,255,255,.02))}
+    .about-card h3{font-size:21px;line-height:1.3;margin:0 0 10px}
+    .about-card p{color:var(--muted);font-size:14px;margin:0}
+    .skill-grid{display:flex;flex-wrap:wrap;gap:9px;margin-top:21px}
+    .skill{padding:8px 12px;border:1px solid var(--line);border-radius:999px;font-size:13px;color:#d6e2dc;background:rgba(255,255,255,.025)}
+    .process{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .step{border-top:1px solid var(--line);padding:15px 13px}
+    .step b{color:var(--mint);font-size:12px;letter-spacing:.1em}
+    .step h3{font-size:16px;margin:8px 0 4px}
+    .step p{font-size:13px;color:var(--muted);margin:0}
+    .contact{padding:32px;border:1px solid rgba(167,243,208,.21);border-radius:28px;background:linear-gradient(120deg,rgba(167,243,208,.1),rgba(255,255,255,.025));display:flex;align-items:center;justify-content:space-between;gap:24px}
+    .contact h2{font-size:30px;letter-spacing:-.04em;margin:0}
+    .contact p{color:var(--muted);margin:6px 0 0}
+    footer{padding:27px 0 36px;color:var(--muted);font-size:12px}
+    .foot{display:flex;justify-content:space-between;gap:18px;border-top:1px solid var(--line);padding-top:20px}
+    .reveal{opacity:0;transform:translateY(14px);transition:opacity .55s ease,transform .55s ease}
+    .reveal.visible{opacity:1;transform:none}
+    @media(max-width:850px){.hero{grid-template-columns:1fr;gap:35px;padding-top:58px}.hero-visual{max-width:620px}.projects{grid-template-columns:repeat(2,1fr)}.example-links{grid-template-columns:repeat(2,1fr)}.about-grid{grid-template-columns:1fr}}
+    @media(max-width:600px){.wrap{width:min(100% - 28px,1120px)}.nav{height:66px}.menu-toggle{display:block}.navlinks{display:none;position:absolute;top:65px;left:0;right:0;padding:16px 20px 20px;background:#131c22;border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch;gap:0}.navlinks.open{display:flex}.navlinks a{padding:11px 0}.nav-cta{display:none}.hero{padding:45px 0 42px}.hero-copy{font-size:16px}.hero-visual{padding:15px}.metric{padding:12px}.metric strong{font-size:21px}section{padding:47px 0}.section-head{align-items:start;flex-direction:column}.projects,.example-links,.process{grid-template-columns:1fr}.project{min-height:0}.contact{align-items:flex-start;flex-direction:column;padding:24px}.foot{flex-direction:column}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}}
+  </style>
 </head>
 <body>
-  <main>
-    <h1>Aman Azhaan</h1>
-    <p>Marketing Analytics · Digital Analytics · BI</p>
-    <p>I turn campaign, web, CRM, and ecommerce data into clear reporting
-       and practical growth recommendations.</p>
+  <header class="topbar">
+    <nav class="nav wrap" aria-label="Main navigation">
+      <a class="brand" href="#top" aria-label="Aman Azhaan home"><span class="brand-mark">AA</span><span>Aman Azhaan</span></a>
+      <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Open menu">Menu</button>
+      <div class="navlinks" id="navLinks">
+        <a href="#work">Selected work</a><a href="#examples">Code & dashboards</a><a href="#about">About</a>
+      </div>
+      <a class="nav-cta" href="#contact">Let’s connect <span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
 
-    <h2>Selected work</h2>
-    <p>SQL and Python analysis, funnel measurement, and BI dashboards
-       across marketing and ecommerce projects.</p>
+  <main id="top">
+    <div class="wrap hero">
+      <div class="reveal">
+        <span class="eyebrow">Marketing analytics · CRO · BI</span>
+        <h1>Make the numbers<br><span class="accent">mean something.</span></h1>
+        <p class="hero-copy">I connect measurement, SQL, Python, and dashboard reporting to help teams understand what is happening across campaigns and customer journeys—and what to look at next.</p>
+        <div class="actions">
+          <a class="button primary" href="#work">Explore selected work <span aria-hidden="true">↓</span></a>
+          <a class="button soft" href="Aman_Azhaan_Proof_of_Work%20(1).pdf" target="_blank" rel="noopener">View proof of work <span aria-hidden="true">↗</span></a>
+        </div>
+        <p class="fine">Experience across digital analytics, lead generation, ecommerce, and campaign reporting.</p>
+      </div>
+      <div class="hero-visual reveal" aria-label="Illustrative marketing analytics dashboard">
+        <div class="visual-head"><div><div class="tiny-label">Measurement snapshot</div><strong>From event to insight</strong></div><span class="live-chip">WORKFLOW</span></div>
+        <div class="metric-grid">
+          <div class="metric"><small>Collect</small><strong>GA4</strong><small>Events & parameters</small></div>
+          <div class="metric"><small>Query</small><strong>SQL</strong><small>Clean, useful tables</small></div>
+          <div class="metric"><small>Transform</small><strong>Python</strong><small>Repeatable data checks</small></div>
+          <div class="metric"><small>Explain</small><strong>BI</strong><small>Decisions in view</small></div>
+        </div>
+        <div class="funnel">
+          <div class="tiny-label">Example journey mapping</div>
+          <div class="bar-label"><span>Landing page visit</span><span>01</span></div><div class="bar"><i style="--w:100%;width:100%"></i></div>
+          <div class="bar-label"><span>CTA interaction</span><span>02</span></div><div class="bar"><i style="--w:72%;width:72%"></i></div>
+          <div class="bar-label"><span>Form completion</span><span>03</span></div><div class="bar"><i style="--w:38%;width:38%"></i></div>
+        </div>
+      </div>
+    </div>
 
-    <a href="Aman_Azhaan_Proof_of_Work%20(1).pdf">
-  View my proof-of-work portfolio
-</a>
-    <p><a href="mailto:azhaan159@gmail.com">Contact me</a></p>
-    <h2>Code and dashboard examples</h2>
-    <p>These code samples use synthetic demonstration data, not client results.</p>
-    <ul>
-      <li><a href="portfolio-examples/sql/01_ga4_event_stage.sql">BigQuery GA4 event staging SQL</a></li>
-      <li><a href="portfolio-examples/sql/02_session_funnel_mart.sql">BigQuery session funnel mart</a></li>
-      <li><a href="portfolio-examples/python/campaign_etl.py">Python campaign ETL and data-quality example</a></li>
-      <li><a href="portfolio-examples/dashboard/index.html">Interactive dashboard preview</a></li>
-      <li><a href="portfolio-examples/dashboard/dashboard_spec.md">Power BI dashboard design and KPI definitions</a></li>
-      <li><a href="portfolio-examples/README.md">How to use the examples</a></li>
-    </ul>
+    <section id="work">
+      <div class="wrap">
+        <div class="section-head reveal"><div><span class="eyebrow">Selected work</span><h2>Turning questions into<br>useful analysis.</h2></div><p>Choose a focus area, then open a card to see the kind of work behind it. Client details are kept high-level.</p></div>
+        <div class="filters reveal" role="group" aria-label="Filter projects">
+          <button class="filter" data-filter="all" aria-pressed="true">All work</button>
+          <button class="filter" data-filter="measurement" aria-pressed="false">Measurement</button>
+          <button class="filter" data-filter="sql" aria-pressed="false">SQL & data</button>
+          <button class="filter" data-filter="cro" aria-pressed="false">CRO & ecommerce</button>
+          <button class="filter" data-filter="bi" aria-pressed="false">BI reporting</button>
+        </div>
+        <div class="projects">
+          <article class="project reveal" data-category="measurement">
+            <div class="project-top"><span class="number">01 / MEASUREMENT</span><span class="project-icon">⌁</span></div>
+            <h3>Lead generation measurement</h3><p>Structured event tracking and funnel reporting for campaign landing pages.</p>
+            <div class="tags"><span class="tag">GA4</span><span class="tag">GTM</span><span class="tag">Funnel QA</span></div>
+            <details><summary>What this involved</summary><div class="detail"><ul><li>Mapped key actions such as CTA clicks, form starts, and successful submissions.</li><li>Reviewed event parameters, consent behavior, and measurement gaps.</li><li>Connected tracking findings to practical reporting and QA recommendations.</li></ul></div></details>
+          </article>
+          <article class="project reveal" data-category="bi">
+            <div class="project-top"><span class="number">02 / BI REPORTING</span><span class="project-icon">▥</span></div>
+            <h3>Campaign performance reporting</h3><p>Built reporting views to make channel performance and lead quality easier to scan.</p>
+            <div class="tags"><span class="tag">Power BI</span><span class="tag">Looker Studio</span><span class="tag">KPI design</span></div>
+            <details><summary>What this involved</summary><div class="detail"><ul><li>Organized spend, leads, qualified leads, and conversion outcomes.</li><li>Defined metric logic and useful channel or campaign cuts.</li><li>Added QA notes to help stakeholders interpret the numbers consistently.</li></ul></div></details>
+          </article>
+          <article class="project reveal" data-category="cro">
+            <div class="project-top"><span class="number">03 / CRO</span><span class="project-icon">↗</span></div>
+            <h3>Ecommerce journey review</h3><p>Reviewed key shopping journeys and prioritized usability and measurement opportunities.</p>
+            <div class="tags"><span class="tag">GA4</span><span class="tag">Clarity</span><span class="tag">Journey analysis</span></div>
+            <details><summary>What this involved</summary><div class="detail"><ul><li>Looked at entry pages, product detail pages, and checkout steps.</li><li>Combined behavioral signals with page review to identify friction points.</li><li>Translated observations into testable, prioritized recommendations.</li></ul></div></details>
+          </article>
+          <article class="project reveal" data-category="sql">
+            <div class="project-top"><span class="number">04 / SQL</span><span class="project-icon">⌘</span></div>
+            <h3>BigQuery funnel analysis</h3><p>SQL examples for shaping GA4 event data into session-level funnel reporting.</p>
+            <div class="tags"><span class="tag">BigQuery</span><span class="tag">UNNEST</span><span class="tag">Funnel logic</span></div>
+            <details><summary>Explore the approach</summary><div class="detail">The repository includes event staging and a session funnel mart. The examples are designed for learning and use illustrative schemas and synthetic data.</div></details>
+          </article>
+          <article class="project reveal" data-category="sql">
+            <div class="project-top"><span class="number">05 / PYTHON ETL</span><span class="project-icon">⟲</span></div>
+            <h3>Campaign data preparation</h3><p>A small ETL demonstration showing tidy campaign inputs and quality checks.</p>
+            <div class="tags"><span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">Data quality</span></div>
+            <details><summary>Explore the approach</summary><div class="detail">The sample script normalizes campaign fields, checks required values, and prepares a clean output. It uses a synthetic CSV included in the repository.</div></details>
+          </article>
+          <article class="project reveal" data-category="bi">
+            <div class="project-top"><span class="number">06 / DASHBOARD DEMO</span><span class="project-icon">◫</span></div>
+            <h3>Interactive dashboard preview</h3><p>Explore sample campaign KPIs with a working channel selector and campaign table.</p>
+            <div class="tags"><span class="tag">Dashboard UX</span><span class="tag">KPI definitions</span><span class="tag">Demo data</span></div>
+            <details><summary>Open the live preview</summary><div class="detail">Switch between channels to explore the sample view. All figures are synthetic and are not client results.<p><a class="text-link" href="portfolio-examples/dashboard/index.html">Launch dashboard demo ↗</a></p></div></details>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="examples">
+      <div class="wrap">
+        <div class="section-head reveal"><div><span class="eyebrow">Hands-on examples</span><h2>Open the workbench.</h2></div><p>Browse code, data, and dashboard materials directly in the repository.</p></div>
+        <div class="example-links">
+          <a class="example reveal" href="portfolio-examples/sql/01_ga4_event_stage.sql"><span class="example-icon">⌘</span><h3>GA4 event staging SQL</h3><p>Extract event parameters and shape raw events for analysis.</p><span class="text-link">View SQL file ↗</span></a>
+          <a class="example reveal" href="portfolio-examples/sql/02_session_funnel_mart.sql"><span class="example-icon">⌁</span><h3>Session funnel mart</h3><p>Build session-level funnel steps from event data.</p><span class="text-link">View SQL file ↗</span></a>
+          <a class="example reveal" href="portfolio-examples/python/campaign_etl.py"><span class="example-icon">⟲</span><h3>Python ETL example</h3><p>Clean and validate campaign records with a repeatable workflow.</p><span class="text-link">View Python file ↗</span></a>
+          <a class="example reveal" href="portfolio-examples/dashboard/index.html"><span class="example-icon">◫</span><h3>Interactive dashboard</h3><p>Filter a sample campaign view by channel and inspect KPIs.</p><span class="text-link">Open live preview ↗</span></a>
+          <a class="example reveal" href="portfolio-examples/dashboard/dashboard_spec.md"><span class="example-icon">▤</span><h3>BI dashboard specification</h3><p>Review metric definitions, layout, and reporting considerations.</p><span class="text-link">View KPI guide ↗</span></a>
+          <a class="example reveal" href="portfolio-examples/data/sample_campaign_data.csv"><span class="example-icon">▦</span><h3>Sample campaign data</h3><p>Download the synthetic dataset used by the practice examples.</p><span class="text-link">View sample CSV ↗</span></a>
+        </div>
+        <p class="fine">The code and dashboard demonstration use synthetic or illustrative data. No client data is included.</p>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="wrap about-grid">
+        <div><span class="eyebrow">How I work</span><div class="section-head"><h2>Clear inputs.<br>Trusted outputs.</h2></div><p class="hero-copy" style="font-size:16px">Good analysis starts with the business question, a dependable measurement plan, and clear definitions. Then I use the right tools to make the answer understandable.</p></div>
+        <div>
+          <div class="about-card reveal"><h3>Marketing analytics with a measurement mindset.</h3><p>My work spans campaign reporting, digital measurement, lead-generation funnels, ecommerce analysis, and CRO. I bring technical detail together with plain-language recommendations that teams can use.</p><div class="skill-grid"><span class="skill">SQL · BigQuery</span><span class="skill">Python</span><span class="skill">Power BI</span><span class="skill">Looker Studio</span><span class="skill">GA4 · GTM</span><span class="skill">CRO</span><span class="skill">Tableau</span></div></div>
+          <div class="process" style="margin-top:18px">
+            <div class="step"><b>01 / DEFINE</b><h3>Align the question</h3><p>Clarify the goal, KPI, source, and decision.</p></div>
+            <div class="step"><b>02 / CHECK</b><h3>Trust the data</h3><p>Validate tracking, joins, and metric logic.</p></div>
+            <div class="step"><b>03 / EXPLAIN</b><h3>Make it usable</h3><p>Show the pattern and the next useful action.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="wrap contact reveal"><div><span class="eyebrow">Say hello</span><h2>Have an analytics question?</h2><p>Reach out to discuss marketing analytics, measurement, or BI opportunities.</p></div><a class="button primary" href="mailto:azhaan159@gmail.com">Email Aman <span aria-hidden="true">↗</span></a></div>
+    </section>
   </main>
+
+  <footer><div class="wrap foot"><span>© <span id="year"></span> Aman Azhaan · Marketing Analytics Portfolio</span><span><a class="text-link" href="Aman_Azhaan_Proof_of_Work%20(1).pdf">Proof of work</a> · <a class="text-link" href="https://github.com/azhaan159-del/aman-azhaan-portfolio">GitHub</a></span></div></footer>
+  <script>
+    const menuToggle=document.getElementById('menuToggle');
+    const navLinks=document.getElementById('navLinks');
+    menuToggle.addEventListener('click',function(){const open=navLinks.classList.toggle('open');menuToggle.setAttribute('aria-expanded',String(open));menuToggle.setAttribute('aria-label',open?'Close menu':'Open menu')});
+    navLinks.querySelectorAll('a').forEach(function(link){link.addEventListener('click',function(){navLinks.classList.remove('open');menuToggle.setAttribute('aria-expanded','false')})});
+    document.querySelectorAll('.filter').forEach(function(button){button.addEventListener('click',function(){const chosen=button.dataset.filter;document.querySelectorAll('.filter').forEach(function(item){item.setAttribute('aria-pressed',String(item===button))});document.querySelectorAll('.project').forEach(function(card){card.hidden=chosen!=='all'&&card.dataset.category!==chosen})})});
+    document.getElementById('year').textContent=new Date().getFullYear();
+    if('IntersectionObserver' in window){const observer=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}})},{threshold:.12});document.querySelectorAll('.reveal').forEach(function(item){observer.observe(item)})}else{document.querySelectorAll('.reveal').forEach(function(item){item.classList.add('visible')})}
+  </script>
 </body>
 </html>
