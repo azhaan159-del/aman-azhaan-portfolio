@@ -1,0 +1,28 @@
+-- Example Power BI measures for a table named Campaigns.
+-- Confirm the model relationships and column types before using.
+
+Spend = SUM(Campaigns[spend])
+
+Impressions = SUM(Campaigns[impressions])
+
+Clicks = SUM(Campaigns[clicks])
+
+Leads = SUM(Campaigns[leads])
+
+Qualified Leads = SUM(Campaigns[qualified_leads])
+
+Conversions = SUM(Campaigns[conversions])
+
+Revenue = SUM(Campaigns[revenue])
+
+CTR = DIVIDE([Clicks], [Impressions])
+
+CPC = DIVIDE([Spend], [Clicks])
+
+CPL = DIVIDE([Spend], [Leads])
+
+Cost per Qualified Lead = DIVIDE([Spend], [Qualified Leads])
+
+Click-to-Conversion Rate = DIVIDE([Conversions], [Clicks])
+
+ROAS = DIVIDE([Revenue], [Spend])
