@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Campaign Dashboard Demo | Aman Azhaan</title>
+<style>
+:root{--navy:#11243a;--teal:#16849a;--mint:#e8f4f2;--ink:#243447;--muted:#64788a;--line:#dce5ea;--bg:#f4f7f9;--white:#fff}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font:15px/1.5 Arial,sans-serif;color:var(--ink)}main{max-width:1120px;margin:0 auto;padding:34px 22px 48px}.eyebrow{color:var(--teal);text-transform:uppercase;letter-spacing:.12em;font-size:12px;font-weight:700}h1{margin:6px 0;color:var(--navy);font-size:32px}.sub{margin:0 0 22px;color:var(--muted)}.notice{background:#fff6df;border:1px solid #efd89e;padding:11px 14px;border-radius:10px;color:#674f19;font-size:13px;margin:16px 0 20px}.toolbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:18px 0}.toolbar label{font-size:13px;font-weight:700;color:var(--muted)}select{margin-left:7px;padding:9px 12px;border:1px solid var(--line);border-radius:8px;background:white;color:var(--ink)}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.card,.panel{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:17px;box-shadow:0 2px 9px #10243a0a}.card .label{font-size:12px;color:var(--muted);font-weight:700;text-transform:uppercase}.card .value{font-size:27px;color:var(--navy);font-weight:700;margin-top:5px}.panel{margin-top:16px}h2{font-size:17px;margin:0 0 12px;color:var(--navy)}table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:right;padding:10px 8px;border-bottom:1px solid var(--line);white-space:nowrap}th:first-child,td:first-child{text-align:left}th{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}.bar{height:8px;background:#dceff0;border-radius:8px;overflow:hidden;min-width:75px}.bar span{display:block;height:100%;background:var(--teal);border-radius:8px}.foot{margin-top:20px;color:var(--muted);font-size:12px}.back{display:inline-block;margin-top:14px;color:var(--teal);text-decoration:none;font-weight:700}@media(max-width:760px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.panel{overflow-x:auto}h1{font-size:27px}}
+</style>
+</head>
+<body>
+<main>
+  <div class="eyebrow">Portfolio demonstration · Aman Azhaan</div>
+  <h1>Campaign performance overview</h1>
+  <p class="sub">A compact example of how channel and campaign data can be summarized for marketing decisions.</p>
+  <div class="notice"><strong>Sample data:</strong> All figures on this page are synthetic and created only to demonstrate a dashboard layout. They are not client results.</div>
+  <div class="toolbar"><label for="channel">Channel</label><select id="channel"><option value="all">All channels</option></select></div>
+  <section class="grid" id="kpis"></section>
+  <section class="panel"><h2>Campaign performance</h2><table><thead><tr><th>Channel / campaign</th><th>Spend</th><th>Leads</th><th>Qualified</th><th>Conversions</th><th>ROAS</th></tr></thead><tbody id="rows"></tbody></table></section>
+  <p class="foot">Definitions: CPL = spend / leads. Cost per qualified lead = spend / qualified leads. ROAS = revenue / spend. Platform-attributed outcomes should be interpreted with the measurement method and attribution window in view.</p>
+  <a class="back" href="../../index.html">← Back to portfolio</a>
+</main>
+<script>
+const data = [
+ {channel:"Google Ads",campaign:"Search - Brand",spend:120,impressions:4200,clicks:210,leads:28,qualified:12,conversions:9,revenue:780},
+ {channel:"Google Ads",campaign:"Search - Category",spend:310,impressions:8900,clicks:267,leads:31,qualified:11,conversions:7,revenue:560},
+ {channel:"Meta Ads",campaign:"Prospecting - Video",spend:250,impressions:18000,clicks:270,leads:19,qualified:5,conversions:4,revenue:260},
+ {channel:"Meta Ads",campaign:"Retargeting - Site Visitors",spend:140,impressions:7400,clicks:185,leads:24,qualified:10,conversions:8,revenue:610},
+ {channel:"Email",campaign:"November Newsletter",spend:35,impressions:5200,clicks:416,leads:15,qualified:9,conversions:11,revenue:920},
+ {channel:"Google Ads",campaign:"Search - Brand",spend:125,impressions:4350,clicks:218,leads:29,qualified:13,conversions:10,revenue:860},
+ {channel:"Google Ads",campaign:"Search - Category",spend:295,impressions:8500,clicks:255,leads:27,qualified:10,conversions:6,revenue:470},
+ {channel:"Meta Ads",campaign:"Prospecting - Video",spend:260,impressions:18500,clicks:278,leads:20,qualified:6,conversions:4,revenue:300},
+ {channel:"Meta Ads",campaign:"Retargeting - Site Visitors",spend:150,impressions:7800,clicks:195,leads:25,qualified:11,conversions:9,revenue:690},
+ {channel:"Email",campaign:"November Newsletter",spend:35,impressions:5100,clicks:408,leads:14,qualified:8,conversions:10,revenue:810},
+ {channel:"Google Ads",campaign:"Search - Brand",spend:118,impressions:4100,clicks:205,leads:27,qualified:12,conversions:9,revenue:810},
+ {channel:"Google Ads",campaign:"Search - Category",spend:330,impressions:9200,clicks:276,leads:30,qualified:12,conversions:8,revenue:650},
+ {channel:"Meta Ads",campaign:"Prospecting - Video",spend:240,impressions:17600,clicks:264,leads:18,qualified:5,conversions:3,revenue:210},
+ {channel:"Meta Ads",campaign:"Retargeting - Site Visitors",spend:155,impressions:8000,clicks:200,leads:26,qualified:12,conversions:9,revenue:700},
+ {channel:"Email",campaign:"November Newsletter",spend:38,impressions:5400,clicks:432,leads:16,qualified:10,conversions:12,revenue:980},
+ {channel:"Google Ads",campaign:"Search - Brand",spend:122,impressions:4280,clicks:214,leads:29,qualified:14,conversions:10,revenue:900},
+ {channel:"Google Ads",campaign:"Search - Category",spend:315,impressions:9000,clicks:270,leads:28,qualified:10,conversions:7,revenue:520},
+ {channel:"Meta Ads",campaign:"Prospecting - Video",spend:270,impressions:19200,clicks:288,leads:22,qualified:7,conversions:5,revenue:355},
+ {channel:"Meta Ads",campaign:"Retargeting - Site Visitors",spend:148,impressions:7650,clicks:191,leads:23,qualified:10,conversions:8,revenue:640},
+ {channel:"Email",campaign:"November Newsletter",spend:36,impressions:5300,clicks:424,leads:16,qualified:9,conversions:11,revenue:890}
+];
+const money = n => new Intl.NumberFormat('en-IN',{style:'currency',currency:'INR',maximumFractionDigits:0}).format(n);
+const nfmt = n => new Intl.NumberFormat('en-IN',{maximumFractionDigits:1}).format(n);
+const sum = (arr,key) => arr.reduce((s,r)=>s+r[key],0);
+const select = document.getElementById('channel');
+[...new Set(data.map(d=>d.channel))].forEach(c=>{const o=document.createElement('option');o.value=c;o.textContent=c;select.appendChild(o)});
+function render(){
+ const ch=select.value; const rows=data.filter(d=>ch==='all'||d.channel===ch);
+ const spend=sum(rows,'spend'), leads=sum(rows,'leads'), qualified=sum(rows,'qualified'), revenue=sum(rows,'revenue');
+ const kpis=[['Spend',money(spend)],['Leads',nfmt(leads)],['Cost / qualified lead',money(qualified?spend/qualified:0)],['ROAS',nfmt(spend?revenue/spend:0)+'×']];
+ document.getElementById('kpis').innerHTML=kpis.map(k=>`<div class="card"><div class="label">${k[0]}</div><div class="value">${k[1]}</div></div>`).join('');
+ const grouped={}; rows.forEach(r=>{const key=r.channel+'|'+r.campaign;if(!grouped[key])grouped[key]={channel:r.channel,campaign:r.campaign,spend:0,leads:0,qualified:0,conversions:0,revenue:0};['spend','leads','qualified','conversions','revenue'].forEach(k=>grouped[key][k]+=r[k])});
+ document.getElementById('rows').innerHTML=Object.values(grouped).map(r=>`<tr><td>${r.channel} / ${r.campaign}</td><td>${money(r.spend)}</td><td>${nfmt(r.leads)}</td><td>${nfmt(r.qualified)}</td><td>${nfmt(r.conversions)}</td><td>${nfmt(r.spend?r.revenue/r.spend:0)}×</td></tr>`).join('');
+}
+select.addEventListener('change',render); render();
+</script>
+</body>
+</html>
